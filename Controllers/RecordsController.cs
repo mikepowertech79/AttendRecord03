@@ -25,6 +25,33 @@ namespace AttendRecord03.Controllers
             return View(await _context.Record.ToListAsync());
         }
 
+
+
+
+
+
+
+
+
+        // GET: Records/ShowSearchForm
+        public async Task<IActionResult> ShowSearchForm()
+        {
+            return View();
+        }
+
+
+
+
+        //POST Records/ShowSearchResults
+        public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
+        {
+            return View("Index", await _context.Record.Where( j => j.PersonName.Contains(SearchPhrase)).ToListAsync());
+        }
+
+
+
+
+
         // GET: Records/Details/5
         public async Task<IActionResult> Details(int? id)
         {
