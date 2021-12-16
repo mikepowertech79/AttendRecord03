@@ -1,0 +1,58 @@
+﻿@model AttendRecord03.Models.Record
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Record</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PersonEmail" class="control-label"></label>
+                <input asp-for="PersonEmail" class="form-control" />
+                <span asp-validation-for="PersonEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PersonName" class="control-label"></label>
+                <input asp-for="PersonName" class="form-control" />
+                <span asp-validation-for="PersonName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AbsenceType" class="control-label"></label>
+                <input asp-for="AbsenceType" class="form-control" />
+                <span asp-validation-for="AbsenceType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AbsenceTimeStart" class="control-label"></label>
+                <input asp-for="AbsenceTimeStart" class="form-control" />
+                <span asp-validation-for="AbsenceTimeStart" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AbsenceTimeEnd" class="control-label"></label>
+                <input asp-for="AbsenceTimeEnd" class="form-control" />
+                <span asp-validation-for="AbsenceTimeEnd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AbsenceHours" class="control-label"></label>
+                <input asp-for="AbsenceHours" class="form-control" />
+                <span asp-validation-for="AbsenceHours" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
