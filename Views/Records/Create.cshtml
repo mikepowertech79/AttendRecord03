@@ -4,6 +4,31 @@
     ViewData["Title"] = "Create";
 }
 
+
+<script type="text/javascript">
+
+/*    alert('Hello! I am an alert box!!');*/
+
+    @Html.Raw(ViewBag.AbsTimeErr)
+
+    @Html.Raw(ViewBag.AbsHoursErr)
+
+    @Html.Raw(ViewBag.AbsDaysErr)
+
+
+        //$(document).ready(function () {
+        //    $("#btnAdd").click(function () {
+        //        var field = $("#field").val();
+        //        var input = "<input name='parameters' id='field' type='text' />";
+        //        var newRow = "<tr><td>" + field + "</td><td>" + input + "</td></tr>";
+        //        $('#controls').append(newRow);
+        //    });
+        //});
+
+    //https://stackoverflow.com/questions/13989741/dynamically-add-controls-javascript-asp-net-c-sharp
+</script>
+
+
 <h1>Create</h1>
 
 <h4>Record</h4>
@@ -22,11 +47,28 @@
                 <input asp-for="PersonName" class="form-control" />
                 <span asp-validation-for="PersonName" class="text-danger"></span>
             </div>
+
+
             <div class="form-group">
-                <label asp-for="AbsenceType" class="control-label"></label>
+
+
+                <select name="AbsenceType" id="AbsenceType" class="form-control" aria-label=".form-select-sm example">
+                    <option selected>Open this menu to select Absence's Type</option>
+                    <option value="年假">年假</option>
+                    <option value="公假">公假</option>
+                    <option value="婚假">婚假</option>
+                </select>
+
+                @*<label asp-for="AbsenceType" class="control-label"></label>
                 <input asp-for="AbsenceType" class="form-control" />
-                <span asp-validation-for="AbsenceType" class="text-danger"></span>
+                <span asp-validation-for="AbsenceType" class="text-danger"></span>*@
+
             </div>
+
+
+
+
+
             <div class="form-group">
                 <label asp-for="AbsenceTimeStart" class="control-label"></label>
                 <input asp-for="AbsenceTimeStart" class="form-control" />

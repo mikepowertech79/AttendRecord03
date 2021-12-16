@@ -86,12 +86,74 @@ namespace AttendRecord03.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,PersonEmail,PersonName,AbsenceType,AbsenceTimeStart,AbsenceTimeEnd,AbsenceHours")] Record record)
         {
-            if (ModelState.IsValid)
+
+            string userEmail = @User.Identity.Name;
+
+            record.PersonEmail = userEmail;
+
+            if (record.AbsenceTimeStart < record.AbsenceTimeEnd)
             {
-                _context.Add(record);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                DateTime date1 = new DateTime(2009, 8, 1, 0, 0, 0);
+                DateTime date2 = new DateTime(2009, 8, 2, 0, 0, 0);
+
+                System.TimeSpan oneDayDiff = date2.Subtract(date1);
+
+                int result = DateTime.Compare(date1, date2);
+
+                date1 = record.AbsenceTimeStart;
+                date2 = record.AbsenceTimeEnd;
+
+                result = DateTime.Compare(date1, date2);
+
+                System.TimeSpan diff = date2.Subtract(date1);
+
+                if ( diff.Days > 0 )
+                {
+
+                    ViewBag.AbsDaysErr = "alert('Hi! Absence Time is greater than a day ');";
+                    return View(record);
+                }
+
+
+                if (record.AbsenceHours == diff.Hours)
+                {
+                    if (ModelState.IsValid)
+                    {
+                        _context.Add(record);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+                }
+
+
+
+                if (record.AbsenceHours != diff.Hours)
+                {
+                    string diffStr = diff.Hours.ToString();
+
+                    ViewBag.AbsHoursErr = "alert('Hi! Absence Hours should be " + diffStr + " hours ');";
+
+                    if(diff.Hours  == 1 )
+                    {
+                        ViewBag.AbsHoursErr = "alert('Hi! Absence Hours should be " + diffStr + " hour ');";
+                    }
+
+                }
+
             }
+
+
+
+
+            if (record.AbsenceTimeStart > record.AbsenceTimeEnd)
+            {
+                ViewBag.AbsTimeErr = "alert('Hi! Absence End Time is greater than Start Time, are you from the future ?!');";
+            }
+
+
+
+
             return View(record);
         }
 
