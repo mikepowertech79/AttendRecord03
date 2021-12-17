@@ -46,6 +46,13 @@ namespace AttendRecord03.Controllers
         //POST Records/ShowSearchResults
         public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
         {
+
+
+            if (SearchPhrase == null)
+            {
+                return View("Index", await _context.Record.ToListAsync());
+            }
+
             int SearchPhraseInt = 0;
 
             try
@@ -69,6 +76,79 @@ namespace AttendRecord03.Controllers
                 j.Id.Equals(SearchPhraseInt)
                 ).ToListAsync());
         }
+
+
+
+
+
+
+
+        //POST Records/ShowSearchResultsPersonName
+        public async Task<IActionResult> ShowSearchResultsPersonName(String SearchPhrase)
+        {
+
+
+            if (SearchPhrase == null)
+            {
+                return View("Index", await _context.Record.ToListAsync());
+            }
+
+            int SearchPhraseInt = 0;
+
+            try
+            {
+                SearchPhraseInt = Int32.Parse(SearchPhrase);
+            }
+            catch
+            {
+                SearchPhraseInt = 99999;
+
+            }
+
+
+            return View("Index",
+                await _context.Record.
+                Where(j =>
+               j.PersonName.Contains(SearchPhrase)).ToListAsync());
+        }
+
+
+
+
+
+
+
+        //POST Records/ShowSearchResultsPersonName
+        public async Task<IActionResult> ShowSearchResultsAbsenceType(String SearchPhrase)
+        {
+
+
+            if (SearchPhrase == null)
+            {
+                return View("Index", await _context.Record.ToListAsync());
+            }
+
+            int SearchPhraseInt = 0;
+
+            try
+            {
+                SearchPhraseInt = Int32.Parse(SearchPhrase);
+            }
+            catch
+            {
+                SearchPhraseInt = 99999;
+
+            }
+
+
+            return View("Index",
+                await _context.Record.
+                Where(j =>
+               j.AbsenceType.Contains(SearchPhrase)).ToListAsync());
+        }
+
+
+
 
 
 

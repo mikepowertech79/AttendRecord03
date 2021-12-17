@@ -4,10 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>新增假單</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">新增 Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -15,10 +15,41 @@
             @*<th>
                 @Html.DisplayNameFor(model => model.PersonEmail)
             </th>*@
+
+
+
             <th>
+
+                <form asp-action="ShowSearchResultsPersonName">
+
+
+                    <div class="form-group">
+                        <label for="SearchPhrase" class="control-label"></label>
+                        <input name="SearchPhrase" class="form-control" />
+
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Search" class="btn btn-primary" />
+                    </div>
+                </form>
+
                 @Html.DisplayNameFor(model => model.PersonName)
             </th>
             <th>
+
+                <form asp-action="ShowSearchResultsAbsenceType">
+
+
+                    <div class="form-group">
+                        <label for="SearchPhrase" class="control-label"></label>
+                        <input name="SearchPhrase" class="form-control" />
+
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Search" class="btn btn-primary" />
+                    </div>
+                </form>
+
                 @Html.DisplayNameFor(model => model.AbsenceType)
             </th>
             <th>
@@ -58,9 +89,9 @@
                 @Html.DisplayFor(modelItem => item.AbsenceHours)
             </td>*@
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">修正</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">細節</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">刪掉</a>
             </td>
         </tr>
 }
