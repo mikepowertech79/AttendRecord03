@@ -46,7 +46,28 @@ namespace AttendRecord03.Controllers
         //POST Records/ShowSearchResults
         public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
         {
-            return View("Index", await _context.Record.Where( j => j.PersonName.Contains(SearchPhrase)).ToListAsync());
+            int SearchPhraseInt = 0;
+
+            try
+            {
+                SearchPhraseInt =  Int32.Parse(SearchPhrase);
+            }
+            catch
+            {
+                SearchPhraseInt = 99999;
+
+            }
+                
+
+            return View("Index", 
+                await _context.Record.
+                Where( j => 
+                j.PersonName.Contains(SearchPhrase)    || 
+                j.PersonEmail.Contains(SearchPhrase)   ||
+                j.AbsenceHours.Equals(SearchPhraseInt) ||
+                j.AbsenceType.Contains(SearchPhrase)   ||
+                j.Id.Equals(SearchPhraseInt)
+                ).ToListAsync());
         }
 
 
